@@ -426,7 +426,7 @@ function getProducts($limit)
     }
                
     $sql = "SELECT
-                oxart.oxtimestamp,
+                ANY_VALUE(oxart.oxtimestamp) AS oxtimestamp,
                 ANY_VALUE(seo.oxseourl) AS oxseourl
             FROM
                 oxarticles as oxart
@@ -480,7 +480,7 @@ function getProductsManufacturer()
     $list = array();
                
     $sql = "SELECT
-                oxart.oxtimestamp,
+                ANY_VALUE(oxart.oxtimestamp) AS oxtimestamp,
                 ANY_VALUE(seo.oxseourl) AS oxseourl,
             FROM
                 oxarticles as oxart
@@ -571,7 +571,7 @@ function getCountScriptCalls()
 {
     global $mod_cnf, $sqlConnect;
     $sql = "SELECT
-                oxart.oxid
+                ANY_VALUE(oxart.oxid) AS oxid
             FROM
                 oxarticles as oxart
             LEFT JOIN oxobject2category as oxobj2cat
