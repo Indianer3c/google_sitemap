@@ -207,7 +207,7 @@ function getCategories()
     global $mod_cnf;
     $list = array();
     $sql = "SELECT 
-                seo.oxseourl
+                ANY_VALUE(seo.oxseourl) AS oxseourl
             FROM
                 oxcategories as oxcats
             LEFT JOIN
@@ -243,7 +243,7 @@ function getCmsSite()
     global $mod_cnf;
     $list = array();
     $sql = "SELECT
-                seo.oxseourl
+                ANY_VALUE(seo.oxseourl) AS oxseourl
             FROM
                 oxcontents as content
             LEFT JOIN
@@ -280,7 +280,7 @@ function getVendors()
     global $mod_cnf;
     $list = array();
     $sql = "SELECT
-                seo.oxseourl
+                ANY_VALUE(seo.oxseourl) AS oxseourl
             FROM
                 oxvendor as vendor
             LEFT JOIN
@@ -316,7 +316,7 @@ function getManufacturers()
     global $mod_cnf;
     $list = array();
     $sql = "SELECT
-                seo.oxseourl
+                ANY_VALUE(seo.oxseourl) AS oxseourl
             FROM
                 oxmanufacturers as manufacturer
             LEFT JOIN
@@ -352,7 +352,7 @@ function getTags()
     global $mod_cnf;
     $list = array();
     $sql = "SELECT
-                seo.oxseourl
+                ANY_VALUE(seo.oxseourl) AS oxseourl
             FROM
                 oxseo seo
             WHERE
@@ -384,7 +384,7 @@ function getStaticUrls()
     global $mod_cnf;
     $list = array();
     $sql = "SELECT
-                seo.oxseourl
+                ANY_VALUE(seo.oxseourl) AS oxseourl
             FROM
                 oxseo seo
             WHERE
@@ -427,7 +427,7 @@ function getProducts($limit)
                
     $sql = "SELECT
                 oxart.oxtimestamp,
-                seo.oxseourl
+                ANY_VALUE(seo.oxseourl) AS oxseourl
             FROM
                 oxarticles as oxart
             LEFT JOIN oxobject2category as oxobj2cat
@@ -445,7 +445,7 @@ function getProducts($limit)
                 ".($mod_cnf['expired'] == true ? '': 'seo.oxexpired = 0 AND ')."
                 seo.oxstdurl LIKE ('%cnid=%')
             GROUP BY
-                seo.oxseourl
+                oxseourl
             LIMIT ".$start." OFFSET ".$end.";";
                        
     $sql_query = mysqli_query($sql);
@@ -481,7 +481,7 @@ function getProductsManufacturer()
                
     $sql = "SELECT
                 oxart.oxtimestamp,
-                seo.oxseourl,
+                ANY_VALUE(seo.oxseourl) AS oxseourl,
             FROM
                 oxarticles as oxart
             LEFT JOIN oxseo as seo
@@ -527,7 +527,7 @@ function getProductsVendor()
     $list = array();
                
     $sql = "SELECT
-                seo.oxseourl
+                ANY_VALUE(seo.oxseourl) AS oxseourl
             FROM
                 oxarticles as oxart
             LEFT JOIN oxseo as seo
