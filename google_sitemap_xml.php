@@ -103,8 +103,8 @@ $sqlConnect = mysqli_connect(
     $mod_cnf['dbuser'],
     $mod_cnf['dbpass']) OR die('error connecting to database.');
 mysqli_select_db(
-    $mod_cnf['dbname'],
-    $sqlConnect) OR die('error selecting table.');
+    $sqlConnect,
+    $mod_cnf['dbname']) OR die('error selecting table.');
 
 //** get number of needed script-calls, based on active items with valid seo-url. cms and categories will be added to first sitemap automatically.
 $cntCalls = ceil(getCountScriptCalls() / $mod_cnf['offset']);
